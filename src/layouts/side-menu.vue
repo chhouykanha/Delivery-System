@@ -6,7 +6,7 @@
 </script>
 
 <template>
-    <div :class="ToggleSidebar.activeSidebar ? 'w-60' : 'w-16 text-center'" class=" h-screen bg-lightgray shadow-sm transition-all duration-300">
+    <div :class="ToggleSidebar.activeSidebar ? 'w-60' : 'w-16 text-center'" class="min-h-screen h-full bg-lightgray shadow-sm transition-all duration-300">
             <div class="flex flex-col pt-10">
                     <RouterLink :to="{name : 'home_page'}" exact-active-class="bg-black text-white" class="flex space-x-2 items-center text-left text-lg p-4 transition hover:bg-secondary hover:text-white">
                         <Icon name="LayoutDashboard" size="20" />

@@ -22,10 +22,10 @@ import Icon from '../base-component/Icon';
                     </Tab>
             </TabList>
             <TabPanels>
-                <TabPanel class="mt-5">
+                <TabPanel>
                          <NewPackageTab />
                 </TabPanel>
-                <TabPanel class="mt-5">
+                <TabPanel>
                         <CheckPackageTab />
                 </TabPanel>
             </TabPanels>

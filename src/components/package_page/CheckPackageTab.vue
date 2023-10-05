@@ -1,6 +1,167 @@
 <script setup>
+        import Icon from '../../base-component/Icon';
+        import Button from '../../base-component/Button';
 </script>
 
 <template>
-        Tab 2
+        <div class="flex justify-between items-center mb-5 mt-10">
+                <div>
+                        <button class="px-8 py-2 text-sm  bg-white shadow-md rounded-md">
+                                <span class="flex space-x-1">
+                                        <Icon name="Filter" />
+                                        <span>ច្រោះទិន្នន័យ</span>
+                                </span>
+                        </button>
+                </div>
+
+                <div class="flex items-center gap-4">
+               
+                        <Button variant="secondary" size="sm" class="rounded-md flex items-center justify-center space-x-2 ">
+                                        <span>
+                                                <Icon name="Check" size="18" stroke-width="1" />
+                                        </span>
+                                        <span>ត្រួតពិនិត្យ</span>
+                        </Button>
+                        <Button variant="primary" size="sm" class="rounded-md flex items-center justify-center space-x-2 ">
+                                        <span>
+                                                <Icon name="Printer" size="18" stroke-width="1" />
+                                        </span>
+                                        <span>ព្រីនឯកសារ</span>
+                        </Button>
+                        <Button variant="warning" size="sm" class="rounded-md flex items-center justify-center space-x-2 ">
+                                        <span>
+                                                <Icon name="Sheet" size="18" stroke-width="1" />
+                                        </span>
+                                        <span>នាំចេញជា Excel</span>
+                        </Button>
+
+                        <div class="relative">
+                                                <input type="name" id="name"
+                                                        class="w-full h-10 p-3 pt-4 placeholder-transparent border border-gray-200 rounded-md peer focus:outline-none focus:border-gray-500 focus:shadow-sm"
+                                                        placeholder="Name" autocomplete="off" />
+                                                <label for="name" class="absolute text-gray-400 top-0 left-0 h-full px-3 py-3 text-sm transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-3 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1">*ស្វែងរក</label>
+                        </div>
+        
+                      
+                </div>
+        </div>
+
+        <div>
+                        <table class="min-w-full border border-gray-300">
+                                                <thead class="bg-lightgray">
+
+                                                        <tr>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        ល.រ
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        លេខសម្គាល់
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        អ្នកផ្ញើរ
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        ឥអ៊ីវ៉ាន់
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        COD
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        ថ្លៃសេវា
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        បង់សេវា
+                                                                </th>
+                                                
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        គិតពី
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        ស្ថានភាពដឹក
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        ផ្នែកងារដឹក
+                                                                </th>
+                                                                <th scope="col" class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900">
+                                                                        អ្នកពិនិត្យ
+                                                                </th>
+                                                        </tr>
+                                                
+                                                </thead>
+
+                                                <tbody>
+                                                        <tr class="bg-white hover:bg-secondary group cursor-pointer transition">
+                                                                <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        1
+                                                                </td>
+                                                                <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        RM094849
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        20000reil
+                                                                </td>
+                                                        </tr>
+                                                        <tr class="bg-lightgray">
+                                                                <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        1
+                                                                </td>
+                                                                <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        RM094849
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                                        20000reil
+                                                                </td>
+                                                        </tr>
+                                                
+                                                </tbody>
+                                </table>
+                </div>
 </template>

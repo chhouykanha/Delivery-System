@@ -1,14 +1,15 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import exchange_rate_data from '../composables/exchange_rate.json';
 import dayjs from 'dayjs' 
+import { useMockData } from './mockdata'
 export const useExchangeRateStore = defineStore('exchage_rate', () => {
-    const exchange_rates = ref(exchange_rate_data);
+    const mockData = useMockData();
+    let exchange_rates = ref(mockData.exchange_rates);
     let id = ref(2);
     let active = ref(true);
     let exchange_rate = ref({
          id : id.value,
-         date : dayjs().format('MM/DD/YYYY'),
+         date : dayjs(new Date()).format('MM/DD/YYYY'),
          usd : 1,
          khmer_exchange : null,
          desc : null,
@@ -78,7 +79,7 @@ export const useExchangeRateStore = defineStore('exchage_rate', () => {
     function clearData(){
         exchange_rate.value = {
             id : id.value,
-            date : dayjs().format('MM/DD/YYYY'),
+            date : dayjs().format('YYYY-MM-DD'),
             usd : 1,
             khmer_exchange : null,
             desc : null,

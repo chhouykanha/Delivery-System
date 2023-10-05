@@ -15,7 +15,7 @@
                     <topMenu/>
             </div>
 
-            <div class="pt-10 px-6">
+            <div class="pt-10 p-6">
                 <RouterView></RouterView>
             </div>
         </div>

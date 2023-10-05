@@ -1,22 +1,17 @@
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, isProxy, toRaw } from 'vue'
 import { defineStore } from 'pinia';
-import categories_data from '../composables/categories.json';
-import { useRouter } from 'vue-router';
-
+import {useMockData} from '../stores/mockdata';
 
 export const useCategoryStore = defineStore('category', () => {
     let id = ref(6);
-    let categories = ref(categories_data);
+    const mockData = useMockData();
+    let categories = ref(mockData.categories);
     let active = ref(true);
     let category = ref({
         id : id.value,
         name : null,
         desc : null
     });
-
-    const router = useRouter();
-
- 
 
     // function clear all data
 
@@ -32,17 +27,14 @@ export const useCategoryStore = defineStore('category', () => {
     const handleAddCategory = () => {
 
         if(category.value.name !== null && category.value.desc !== null){
-          categories_data.push({
+          categories.value.push({
                 id : ++id.value,
                 name : category.value.name,
                 desc : category.value.desc,
                 status : true
           })
-          categories.value = categories_data;
-          router.push({name : 'home_page'})
-          router.push({name : 'category_page'})
           clearData();
-          
+          console.log(categories.value)
          
         }else{
           alert('You have to insert data!');
@@ -72,10 +64,6 @@ export const useCategoryStore = defineStore('category', () => {
         clearData();
     }
 
-    const forceTableRefresh = () => {
-        // Break Vue ref reactivity by recreating the data object
-        categories.value = JSON.parse(JSON.stringify(categories.value))
-    }
 
     return {
         categories,

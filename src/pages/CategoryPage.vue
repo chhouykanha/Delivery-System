@@ -2,54 +2,15 @@
 import {computed, ref, } from 'vue';
 import Button from '../base-component/Button';
 import { useCategoryStore } from '../stores/category';
-import {
-        useVueTable,
-        FlexRender,
-        getCoreRowModel,
-        getPaginationRowModel,
-        getSortedRowModel,
-        getFilteredRowModel,
-} from '@tanstack/vue-table';
 
-const categoryStore = useCategoryStore();
-const sorting = ref([]);
-const columnsCategory = [
-  {
-    accessorKey: 'id',
-    header: 'លេខសម្គាល់',
-    enableSorting: true,
-  },
-  {
-    accessorKey: 'name',
-    header: 'ប្រភេទអ៊ីវ៉ាន់',
-    enableSorting: true,
-  },
-  {
-    accessorKey: 'desc',
-    header: 'បរិយាយ',
-    enableSorting: false,
-  }
-];
+let categoryStore = useCategoryStore();
+let data = ref(categoryStore.categories);
 
-const categories = ref(categoryStore.categories);
-
-const table = useVueTable({
-  data: categories.value,
-  columns: columnsCategory,
-  getSortedRowModel: getSortedRowModel(),
-  getCoreRowModel: getCoreRowModel(),
-  state: {
-    get sorting() {
-      return sorting.value
-    },
-  },
-  onSortingChange: updaterOrValue => {
-    sorting.value =
-      typeof updaterOrValue === 'function'
-        ? updaterOrValue(sorting.value)
-        : updaterOrValue
-  },
-})
+const columnHeader = ref([
+        'លេខសម្គាល់',
+        'ប្រភេទឥវ៉ាន់',
+        'បរិយាយ'
+]);
 
 </script>
 
@@ -59,47 +20,30 @@ const table = useVueTable({
                         <table class="min-w-full border border-gray-300">
                                 <thead class="bg-lightgray">
 
-                                        <tr  v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
+                                        <tr>
                                                 <th 
-                                                        v-for="header in headerGroup.headers"
-                                                        :key="header.id"
+                                                        v-for="(column, idx) in columnHeader" :key="idx"
                                                         scope="col"
                                                         class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900"
-                                                        :class="{'cursor-pointer select-none': header.column.getCanSort(),}"
-                                                        @click="header.column.getToggleSortingHandler()?.($event)"
+                                                        
                                                         >
-
-                                                        <FlexRender
-                                                                :render="header.column.columnDef.header"
-                                                                :props="header.getContext()"
-                                                                />
-                                                                {{ { asc: '&#129169;', desc: '&#129171;' }[header.column.getIsSorted()] }}
-                                                    
+                                                {{ column }}
                                                 </th>
                                         </tr>
                                        
                                 </thead>
 
                                 <tbody>
-                                        <tr v-for="row in table.getRowModel().rows" :key="row.id">
-                                                <td
-                                                        v-for="cell in row.getVisibleCells()"
-                                                        :key="cell.id"
-                                                        class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500"
-                                                        >
-                                                        <div v-if="cell.column.id == 'name'" class="text-blue-600 underline cursor-pointer" @click="categoryStore.handleEdit(row.original.id)">
-                                                        <FlexRender
-                                                                :render="cell.column.columnDef.cell"
-                                                                :props="cell.getContext()"
-                                                        />                 
-                                                        </div>
-                                                        <div v-else class="pointer-events-none" >
-                                                        <FlexRender
-                                                                :render="cell.column.columnDef.cell"
-                                                                :props="cell.getContext()"
-                                                        />                 
-                                                        </div>
-                                                        </td>
+                                        <tr v-for="row in data" :key="row.id">
+                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                        {{ row.id }}
+                                                </td>
+                                                <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-blue-600 underline cursor-pointer" @click="categoryStore.handleEdit(row.id)">
+                                                        {{ row.name }}
+                                                </td>
+                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
+                                                        {{ row.desc }}
+                                                </td>
                                         </tr>
                                        
                                 </tbody>
@@ -128,10 +72,10 @@ const table = useVueTable({
 
                         
 
-                        <div class="flex justify-end space-x-4">
+                        <div class="flex justify-end space-x-2">
                                 <Button @click="categoryStore.clearData" size="sm" variant="gray" class="rounded-md">បោះបង់</Button>
                                 <Button v-if="categoryStore.active" @click="categoryStore.handleAddCategory" size="sm" variant="secondary" class="rounded-md">បញ្ចូល</Button>
-                                <div v-if="!categoryStore.active" class="space-x-2">
+                                <div v-if="!categoryStore.active" class="space-x-1">
                                         <Button size="sm" variant="warning" class="rounded-md" @click="categoryStore.handleUpdate">កែប្រែ</Button>
                                         <Button size="sm" variant="danger" class="rounded-md" @click="categoryStore.handleDelete" >លុប</Button>
                                 </div>
