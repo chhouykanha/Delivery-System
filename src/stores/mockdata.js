@@ -211,7 +211,7 @@ export const useMockData = defineStore( 'MockData', () => {
             payment_status_id : 1,
             shipping_status : 'រៀបចំដឹក',
             shipping_status_id : 1,
-            cod : 15000,
+            cod : 150000,
             note : 'la la',
             qr_code : 'https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg',
             bar_code : 'https://png.pngtree.com/png-clipart/20220424/original/pngtree-black-and-white-icons-of-barcode-numbers-png-image_7554658.png',

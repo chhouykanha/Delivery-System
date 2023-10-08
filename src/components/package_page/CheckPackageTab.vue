@@ -1,9 +1,19 @@
 <script setup>
+        import {ref} from 'vue';
         import Icon from '../../base-component/Icon';
         import Button from '../../base-component/Button';
         import { useMockData } from '../../stores/mockdata';
+        import ShowDetailPackageModal from '../modal/ShowDetailPackageModal.vue';
 
         const mockdata = useMockData();
+        let packageDetail = ref(null);
+        let isOpenShowPackageModal = ref(false);
+
+        const handleShowPackageDetail = (id) => {
+                isOpenShowPackageModal.value = true;
+                let findIndex = mockdata.products.findIndex(product => product.id === id);
+                packageDetail.value = mockdata.products[findIndex];
+        }
 </script>
 
 <template>
@@ -93,7 +103,7 @@
                                                 </thead>
 
                                                 <tbody>
-                                                        <tr v-for="(data , idx) in mockdata.products" :key="data.id" class="bg-white hover:bg-secondary group cursor-pointer transition">
+                                                        <tr v-for="(data , idx) in mockdata.products" @click="handleShowPackageDetail(data.id)" :key="data.id" class="bg-white hover:bg-secondary group cursor-pointer transition">
                                                                 <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
                                                                        {{ ++idx }}
                                                                 </td>
@@ -132,4 +142,8 @@
                                                 </tbody>
                                 </table>
                 </div>
+
+
+        <ShowDetailPackageModal :package="packageDetail" :isOpenShowPackageModal="isOpenShowPackageModal" @isCloseShowPackageModal="isOpenShowPackageModal = false" />
+        
 </template>

@@ -37,8 +37,6 @@ const sortCateogry = computed(() => {
           return a.category - b.category;
         }
 
-        
-
         // If all columns are equal, return 0
         return 0;
       });

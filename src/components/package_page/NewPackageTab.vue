@@ -10,7 +10,8 @@
         let active1 = ref(false);
         let active2 = ref(false);
         let activeFilter = ref(false);
-        
+        let showSingleData = ref(mockdata.products[mockdata.products.length - 1]);
+  
         const emits = defineEmits(['closeAddPackageModal']);
         
         const isOpenAddPackageModal = ref(false);
@@ -22,6 +23,12 @@
         }
         function openModalTag() {
                 isOpen.value = true
+        }
+
+
+        const handleShowData = (id) => {
+                let findIndex = mockdata.products.findIndex(product => product.id === id)
+                showSingleData.value = mockdata.products[findIndex];
         }
 
 
@@ -91,9 +98,9 @@
                                                         </tr>
                                                 
                                                 </thead>
-
+                                              
                                                 <tbody>
-                                                        <tr v-for="(data, idx) in mockdata.products" :key="data.id" :class="idx % 2 == 0 ? 'bg-white' : 'bg-lightgray'" class=" hover:bg-secondary group cursor-pointer transition">
+                                                        <tr v-for="(data, idx) in mockdata.products" :key="data.id" @click="handleShowData(data.id)" :class="idx % 2 == 0 ? 'bg-white' : 'bg-lightgray'" class=" hover:bg-secondary group cursor-pointer transition">
                                                                 <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
                                                                        {{ ++idx }}
                                                                 </td>
@@ -242,10 +249,13 @@
 
                                                                                                                         </div>
                                                                                                                 </div>
-                                                                                                                <div class="p-2">
-                                                                                                                        <div class="">
-                                                                                                                                <img :src="data.qr_code" alt="qr_code">
+                                                                                                                <div class="font-battambang">
+                                                                                                                        <div class="p-2 flex flex-col items-center justify-center border-b-2 border-slate-200">
+                                                                                                                                <img class="w-16 h-16" :src="data.qr_code" alt="qr_code">
+                                                                                                                                <p>ស្កេនមើលព័ត៌មាន</p>
                                                                                                                         </div>
+
+                                                                                                                        
                                                                                                                 </div>
                                                                                                         </div>
                                                                                         
@@ -306,42 +316,42 @@
                                                <ul class="border-b-2 border-lightgray">
                                                         <li class="flex p-2 justify-between ">
                                                                 <span>ប្រាក់ទទួលបានសរុប</span>
-                                                                <span>1534,985៛</span>
+                                                                <span>{{ showSingleData.cod }}.00 ៛</span>
                                                         </li>
                                                </ul>
 
                                                 <ul class="space-y-2 border-b-2 border-lightgray">
                                                         <li class="flex px-2 justify-between">
                                                                 <span>ស្ថានភាពដឹក</span>
-                                                                <span>បានដឹកដល់</span>
+                                                                <span>{{ showSingleData.shipping_status }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>ប្រភេទឥវ៉ាន់</span>
-                                                                <span>របស់ក្មេងលេង</span>
+                                                                <span>{{ showSingleData.category }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>ទម្ងន់</span>
-                                                                <span>2.5kg</span>
+                                                                <span>{{ showSingleData.product_weight }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>អ្នកផ្ញើរ</span>
-                                                                <span>012345678</span>
+                                                                <span>{{ showSingleData.sender_phone }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>អាស័យដ្ឋាន</span>
-                                                                <span class="line-clamp-1">បាត់ដំបង</span>
+                                                                <span class="line-clamp-1">{{ showSingleData.sender_address}}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>អ្នកទទួល</span>
-                                                                <span>012345678</span>
+                                                                <span>{{ showSingleData.receiver_phone }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between">
                                                                 <span>អាស័យដ្ឋាន</span>
-                                                                <span class="line-clamp-1">បាត់ដំបង</span>
+                                                                <span class="line-clamp-1">{{ showSingleData.receiver_address }}</span>
                                                         </li>
                                                         <li class="flex px-2 justify-between font-semibold">
                                                                 <span>ផ្នែកងារដឹក</span>
-                                                                <span class="line-clamp-1">Tort Tueng</span>
+                                                                <span class="line-clamp-1">{{ showSingleData.carrier }}</span>
                                                         </li>
                                                        
                                                 </ul>
