@@ -1,5 +1,5 @@
 <script setup>
-        import {ref} from 'vue';
+        import {ref, computed} from 'vue';
         import Icon from '../../base-component/Icon';
         import Button from '../../base-component/Button';
         import {useMockData} from '../../stores/mockdata';
@@ -17,6 +17,7 @@
         const isOpenAddPackageModal = ref(false);
   
         const isOpen = ref(false)
+        let searchQuery = ref('');
         
         function closeModalTag() {
                 isOpen.value = false
@@ -25,11 +26,15 @@
                 isOpen.value = true
         }
 
-
         const handleShowData = (id) => {
                 let findIndex = mockdata.products.findIndex(product => product.id === id)
                 showSingleData.value = mockdata.products[findIndex];
         }
+
+
+        const filterSearchPackage = computed(() => {
+                return mockdata.products.filter(product => product.no.toLowerCase().includes(searchQuery.value.toLowerCase()));
+        });
 
 
 
@@ -59,9 +64,11 @@
                                 </div>
                                         <div class="relative">
                                                 <input type="name" id="name"
+                                                       v-model="searchQuery"
+                                                        
                                                         class="w-full h-10 p-3 pt-4 placeholder-transparent border border-gray-200 rounded-md peer focus:outline-none focus:border-gray-500 focus:shadow-sm"
                                                         placeholder="Name" autocomplete="off" />
-                                                <label for="name" class="absolute text-gray-400 top-0 left-0 h-full px-3 py-3 text-sm transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-3 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1">*ស្វែងរក</label>
+                                                <label for="name" class="absolute text-gray-400 top-0 left-0 h-full px-3 py-3 text-sm transition-all duration-100 ease-in-out origin-left transform scale-75 translate-x-1 -translate-y-3 opacity-75 pointer-events-none peer-placeholder-shown:opacity-100 peer-focus:opacity-75 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-placeholder-shown:translate-x-0 peer-focus:translate-x-1">*ស្វែងរកតាមរយៈលេខសម្គាល់</label>
                                         </div>
                         </div>
 
@@ -100,7 +107,7 @@
                                                 </thead>
                                               
                                                 <tbody>
-                                                        <tr v-for="(data, idx) in mockdata.products" :key="data.id" @click="handleShowData(data.id)" :class="idx % 2 == 0 ? 'bg-white' : 'bg-lightgray'" class=" hover:bg-secondary group cursor-pointer transition">
+                                                        <tr v-for="(data, idx) in filterSearchPackage" :key="data.id" @click="handleShowData(data.id)" :class="idx % 2 == 0 ? 'bg-white' : 'bg-lightgray'" class=" hover:bg-secondary group cursor-pointer transition">
                                                                 <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
                                                                        {{ ++idx }}
                                                                 </td>
@@ -122,6 +129,8 @@
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
                                                                         {{data.shipping_status }}
                                                                 </td>
+
+
                                                                 <td class=" text-center whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
                                                                         
                                                                         <Popover class="relative">
@@ -269,9 +278,26 @@
                                                                         </div>
                                                                 </td>
                                                         </tr>
+
                                                 
                                                 </tbody>
                                 </table>
+                                
+                                <div class="flex justify-between items-center mt-4">
+                                        <div></div>
+                                        <div class="rounded-md border  border-gray-400 text-xs">
+                                                <button class="border  border-gray-300 px-2 py-1">First</button>
+                                                <button class="border  border-gray-300 px-2 py-1">Prev</button>
+                                                <button class="border  border-gray-300 px-2 py-1">1</button>
+                                                <button class="border  border-gray-300 px-2 py-1">2</button>
+                                                <button class="border  border-gray-300 px-2 py-1">3</button>
+                                                <button class="border  border-gray-300 px-2 py-1">4</button>
+                                                <button class="border  border-gray-300 px-2 py-1">5</button>
+                                                <button class="border  border-gray-300 px-2 py-1">...</button>
+                                                <button class="border  border-gray-300 px-2 py-1">Next</button>
+                                                <button class="border  border-gray-300 px-2 py-1">Last</button>
+                                        </div>
+                                </div>
                         </div>
                </div>
 

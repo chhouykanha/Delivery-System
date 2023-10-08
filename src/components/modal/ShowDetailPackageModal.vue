@@ -86,18 +86,25 @@
                                                 <span>{{ props.package.checker }}</span>
                                             </div>
                                         </div>
-                                        <div class="rounded-md p-2 border-2 border-slate-200">
-                                                <div class="p-2 border-b-2 border-slate-200">
-                                                        ព័ត៌មានដឹក
-                                                </div>
+                                        <div class="rounded-md p-4 border-2 border-slate-200">
+                                                
+                                                    <div class="flex justify-between items-center">
+                                                        <span>អ្នកត្រួតពិនិត្យ</span>
+                                                        <span>{{ props.package.shipping_status }}</span>
+                                                    </div>
+                                                
                                         </div>
                                     </div>
                                     <div class="rounded-md p-2 border-2 border-slate-200">
-                                                <div class="p-2 border-b-2 border-slate-200">
+                                                <div class="border-b-2 border-slate-200">
                                                         ព័ត៌មានដឹក
                                                 </div>
                                     </div>
-                                    <div class="rounded-md p-2 border-2 border-slate-200">asdkfjasdlkfj</div>
+                                    <div class="rounded-md p-2 border-2 border-slate-200">
+                                                <div class="border-b-2 border-slate-200">
+                                                        ប្រវត្តិកែប្រែស្ថានភាព
+                                                </div>
+                                    </div>
                             </div>
                         </DialogPanel>
                     
