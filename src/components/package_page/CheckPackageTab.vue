@@ -1,6 +1,9 @@
 <script setup>
         import Icon from '../../base-component/Icon';
         import Button from '../../base-component/Button';
+        import { useMockData } from '../../stores/mockdata';
+
+        const mockdata = useMockData();
 </script>
 
 <template>
@@ -90,77 +93,42 @@
                                                 </thead>
 
                                                 <tbody>
-                                                        <tr class="bg-white hover:bg-secondary group cursor-pointer transition">
+                                                        <tr v-for="(data , idx) in mockdata.products" :key="data.id" class="bg-white hover:bg-secondary group cursor-pointer transition">
                                                                 <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        1
+                                                                       {{ ++idx }}
                                                                 </td>
                                                                 <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        RM094849
+                                                                        {{ data.no }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.sender_phone }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.category }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.cod }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                       {{ data.service_fee }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{data.payment_status}}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.service_fee_charge }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                       {{ data.shipping_status }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.carrier }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{data.checker}}
                                                                 </td>
                                                         </tr>
-                                                        <tr class="bg-lightgray">
-                                                                <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        1
-                                                                </td>
-                                                                <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        RM094849
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                        </tr>
-                                                
+                                                       
                                                 </tbody>
                                 </table>
                 </div>

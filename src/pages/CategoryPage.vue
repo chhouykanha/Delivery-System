@@ -7,10 +7,43 @@ let categoryStore = useCategoryStore();
 let data = ref(categoryStore.categories);
 
 const columnHeader = ref([
-        'លេខសម្គាល់',
-        'ប្រភេទឥវ៉ាន់',
-        'បរិយាយ'
+        {name : 'id' , title : 'លេខសម្គាល់'},
+        {name : 'category', title : 'ប្រភេទឥវ៉ាន់' },
+        {name : 'desc', title : 'បរិយាយ'}
 ]);
+
+const sortKey =  ref('លេខសម្គាល់');
+const sortDirection =  ref('asc');
+const search = ref('');
+
+function sortBy(key) {
+        if (sortKey.value === key) {
+        sortDirection.value = sortDirection.value === "asc" ? "desc" : "asc";
+      } else {
+        sortKey.value = key;
+        sortDirection.value = "asc";
+      }
+}
+
+const sortCateogry = computed(() => {
+        return data.value.sort((a, b) => {
+        // Sort by the first column
+        if (sortKey.value === "id") {
+          return a.id.localeCompare(b.id);
+        }
+
+        // If the first column is equal, sort by the second column
+        if (a.id === b.id && sortKey.value === "category") {
+          return a.category - b.category;
+        }
+
+        
+
+        // If all columns are equal, return 0
+        return 0;
+      });
+})
+
 
 </script>
 
@@ -23,18 +56,19 @@ const columnHeader = ref([
                                         <tr>
                                                 <th 
                                                         v-for="(column, idx) in columnHeader" :key="idx"
+                                                        @click="sortBy(column)"
                                                         scope="col"
-                                                        class="py-1.5 px-1 border border-gray-300 text-left text-sm font-semibold text-gray-900"
+                                                        class="py-1.5 px-1 cursor-pointer border border-gray-300 text-left text-sm font-semibold text-gray-900"
                                                         
                                                         >
-                                                {{ column }}
+                                                {{ column.title }}
                                                 </th>
                                         </tr>
                                        
                                 </thead>
 
                                 <tbody>
-                                        <tr v-for="row in data" :key="row.id">
+                                        <tr v-for="row in sortCateogry" :key="row.id">
                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
                                                         {{ row.id }}
                                                 </td>

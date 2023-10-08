@@ -19,8 +19,8 @@
      const defaultStyle = "transition active:scale-95";
 
     // Sizes
-    const small = "text-sm px-6 py-2";
-    const large = "text-lg px-8 py-2";
+    const small = "text-sm p-2";
+    const large = "text-lg p-2";
 
     // Main Colors
 

@@ -2,24 +2,53 @@
         import {ref} from 'vue';
         import Icon from '../../base-component/Icon';
         import Button from '../../base-component/Button';
+        import {useMockData} from '../../stores/mockdata';
+        import { Popover, PopoverButton, PopoverPanel,  TransitionRoot,TransitionChild,Dialog,DialogPanel}from '@headlessui/vue';
+        import AddPackageModal from '../modal/AddPackageModal.vue';
 
+        const mockdata = useMockData();
         let active1 = ref(false);
         let active2 = ref(false);
+        let activeFilter = ref(false);
+        
+        const emits = defineEmits(['closeAddPackageModal']);
+        
+        const isOpenAddPackageModal = ref(false);
+  
+        const isOpen = ref(false)
+        
+        function closeModalTag() {
+                isOpen.value = false
+        }
+        function openModalTag() {
+                isOpen.value = true
+        }
+
+
 
         
+
 </script>
 
 <template>
         <div class="grid grid-cols-3 gap-5">
                <div class="col-span-2">
-                        <div class="flex justify-between items-center mb-5 mt-10">
-                                <div>
-                                                <button class="px-8 py-2 text-sm  bg-white shadow-md rounded-md">
-                                                <span class="flex space-x-1">
-                                                                <Icon name="Filter" />
-                                                                <span>ច្រោះទិន្នន័យ</span>
-                                                </span>
-                                                </button>
+                        <div class="flex justify-between items-center mb-5 mt-14">
+                                <div class="relative">
+                                                <div @click="activeFilter = !activeFilter" :class="activeFilter ? 'w-96 h-auto' : 'w-auto h-auto'" class=" transition cursor-pointer px-4 py-2 text-sm  bg-white shadow-md rounded-md absolute -top-5 left-0">
+                                                        <span class="flex space-x-1">
+                                                                        <Icon name="Filter" />
+                                                                        <span>ច្រោះទិន្នន័យ</span>
+                                                        </span>
+
+                                                        <div v-if="activeFilter" class="p-2" >
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit eos minus enim et in nihil dolores est a quisquam culpa. Suscipit ipsa totam quisquam earum saepe animi possimus, ex et sequi minus similique nostrum itaque sit beatae, ad quam cumque nam! Amet mollitia cum nulla voluptates quaerat laboriosam, totam, tempore dolor, eligendi distinctio magnam? Consectetur vel facilis debitis dicta sapiente sed at laborum reiciendis ea consequuntur quasi quidem, minima officiis labore ipsam similique aut impedit natus maiores odio magnam! Iure quis nihil exercitationem, molestiae nobis temporibus, minima at qui ratione aut labore id ducimus deleniti cum repudiandae excepturi iste repellat!
+                                                        </div>
+
+
+
+                                                       
+                                                </div>
                                 </div>
                                         <div class="relative">
                                                 <input type="name" id="name"
@@ -64,56 +93,170 @@
                                                 </thead>
 
                                                 <tbody>
-                                                        <tr class="bg-white hover:bg-secondary group cursor-pointer transition">
+                                                        <tr v-for="(data, idx) in mockdata.products" :key="data.id" :class="idx % 2 == 0 ? 'bg-white' : 'bg-lightgray'" class=" hover:bg-secondary group cursor-pointer transition">
                                                                 <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        1
+                                                                       {{ ++idx }}
                                                                 </td>
                                                                 <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        RM094849
+                                                                       {{ data.no }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.service_fee }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.service_fee_charge }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.payment_status }}
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{ data.cod }}៛
                                                                 </td>
                                                                 <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
+                                                                        {{data.shipping_status }}
                                                                 </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
-                                                                        20000reil
-                                                                </td>
-                                                        </tr>
-                                                        <tr class="bg-lightgray">
-                                                                <td class="whitespace-nowrap border  border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        1
-                                                                </td>
-                                                                <td class=" whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        RM094849
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
-                                                                </td>
-                                                                <td class="whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500">
-                                                                        20000reil
+                                                                <td class=" text-center whitespace-nowrap border border-gray-300 px-2 py-1.5 text-sm text-gray-500 group-hover:text-white">
+                                                                        
+                                                                        <Popover class="relative">
+                                                                                <PopoverButton @click="" class="bg-gray-300 px-3 py rounded-full group-hover:bg-gray-600">
+                                                                                        <Icon name="MoreHorizontal" stroke-width="2" />
+                                                                                </PopoverButton>
+                                                                                
+                                                                                <PopoverPanel class="text-black transition absolute -top-5 right-20 z-10 rounded-md bg-white  shadow-lg px-2 py">
+                                                                                <div class="absolute -right-2 top-6 h-0 w-0 border-t-8 border-l-8 border-b-8 
+                                                                                                border-solid border-t-transparent border-b-transparent border-l-white"></div>
+                                                                                <div class="flex items-start p-2 flex-col space-y-3 py-3">
+                                                                                        <button @click="openModalTag" class="text-xs flex justify-between space-x-3 items-center">
+                                                                                                <span>
+                                                                                                        <Icon name="Printer" size="15"  />
+                                                                                                </span>
+                                                                                                <span>ព្រីនស្លាក</span>
+                                                                                        </button>
+                                                                                        <button class="text-xs flex justify-between space-x-3 items-center">
+                                                                                                <span>
+                                                                                                        <Icon name="Check" size="15"  />
+                                                                                                </span>
+                                                                                                <span>ត្រួតពិនិត្យ</span>
+                                                                                        </button>
+                                                                                        <button class="text-xs flex justify-between space-x-3 items-center">
+                                                                                                <span>
+                                                                                                        <Icon name="ArrowRightSquare" size="15"  />
+                                                                                                </span>
+                                                                                                <span>សម្គាល់មកស្ថានភាពដើមវិញ</span>
+                                                                                        </button>
+                                                                                </div>
+                                                                                </PopoverPanel>
+
+                                                                                <!-- </TransitionRoot> -->
+                                                                        </Popover>
+
+                                                                        <div>
+                                                                                <TransitionRoot appear :show="isOpen" as="template">
+                                                                                        <Dialog as="div" @close="closeModalTag" class="relative z-10 text-xs">
+                                                                                                <TransitionChild
+                                                                                                as="template"
+                                                                                                enter="duration-300 ease-out"
+                                                                                                enter-from="opacity-0"
+                                                                                                enter-to="opacity-100"
+                                                                                                leave="duration-200 ease-in"
+                                                                                                leave-from="opacity-100"
+                                                                                                leave-to="opacity-0"
+                                                                                                >
+                                                                                                <div class="fixed inset-0 bg-black bg-opacity-25" />
+                                                                                                </TransitionChild>
+                                                                                        
+                                                                                                <div class="fixed inset-0 overflow-y-auto">
+                                                                                                <div
+                                                                                                class="flex min-h-full items-center justify-center p-4 text-center"
+                                                                                                >
+                                                                                                <TransitionChild
+                                                                                                as="template"
+                                                                                                enter="duration-300 ease-out"
+                                                                                                enter-from="opacity-0 scale-95"
+                                                                                                enter-to="opacity-100 scale-100"
+                                                                                                leave="duration-200 ease-in"
+                                                                                                leave-from="opacity-100 scale-100"
+                                                                                                leave-to="opacity-0 scale-95"
+                                                                                                >
+                                                                                                <DialogPanel
+                                                                                                        class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all"
+                                                                                                >
+                                                                                                        
+                                                                                                        <div class="grid grid-cols-3 mt-2">
+                                                                                                                <div class="col-span-2 border-r-2 border-slate-200 font-battambang">
+                                                                                                                        <div class="mb-5">
+                                                                                                                                <div class="mb-3">
+                                                                                                                                        <p>អ្នកទទូល</p>
+                                                                                                                                        <div class="pl-2">
+                                                                                                                                                <p>លេខទូរស័ព្ទ៖ <span>{{ data.receiver_phone }}</span></p>
+                                                                                                                                                <p>អាស័យដ្ឋាន៖ <span>{{ data.receiver_address }}</span></p>
+                                                                                                                                        </div>
+                                                                                                                                </div>     
+                                                                                                                                <div class="mb-3">
+                                                                                                                                        <p>អ្នកផ្ញើរ</p>
+                                                                                                                                        <div class="pl-2">
+                                                                                                                                                <p>លេខទូរស័ព្ទ៖ <span>{{ data.sender_phone }}</span></p>
+                                                                                                                                                <p>អាស័យដ្ឋាន៖ <span>{{ data.sender_address }}</span></p>
+                                                                                                                                        </div>
+                                                                                                                                </div>     
+                                                                                                                        </div>
+
+                                                                                                                        <div class="border-b-2 decoration-slate-700"></div>
+
+                                                                                                                        <div class="my-3">
+                                                                                                            
+                                                                                                                                        <p>អ៊ីវ៉ាន់</p>
+                                                                                                                                        <div class="flex justify-center">
+                                                                                                                                               <table class="border border-slate-500">
+                                                                                                                                                        <tr class="border border-slate-500 p-2">
+                                                                                                                                                                <td class="border border-slate-500 p-2">
+                                                                                                                                                                        <span class="block mb-2">
+                                                                                                                                                                                ថ្លៃសេវា
+                                                                                                                                                                        </span>
+                                                                                                                                                                        <span>
+                                                                                                                                                                                {{ data.service_fee }} KHR
+                                                                                                                                                                        </span>
+                                                                                                                                                                </td>
+                                                                                                                                                                <td class="border border-slate-500 p-2 space-y-2">
+                                                                                                                                                                        <span class="block mb-2">
+                                                                                                                                                                                COD
+                                                                                                                                                                        </span>
+                                                                                                                                                                        <span>
+                                                                                                                                                                                {{ data.cod }} KHR
+                                                                                                                                                                        </span>
+                                                                                                                                                                </td>
+                                                                                                                                                        </tr>
+
+                                                                                                                                                        <tr class="border border-slate-500 p-2">
+                                                                                                                                                                 <td colspan="2" class="border text-center border-slate-500 p-2">
+                                                                                                                                                                        {{ data.service_fee + data.cod }} KHR
+                                                                                                                                                                 </td>               
+                                                                                                                                                        </tr>
+                                                                                                                                               </table>
+                                                                                                                                        </div>
+
+                                                                                                                        </div>
+
+                                                                                                                        <div>
+                                                                                                                                <p>ប្រភេទឥវ៉ាន់​៖ {{ data.category }}, {{ data.product_weight }}kg</p>
+
+                                                                                                                        </div>
+                                                                                                                </div>
+                                                                                                                <div class="p-2">
+                                                                                                                        <div class="">
+                                                                                                                                <img :src="data.qr_code" alt="qr_code">
+                                                                                                                        </div>
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                        
+                                                                                                      
+                                                                                                </DialogPanel>
+                                                                                        </TransitionChild>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                </Dialog>
+                                                                                </TransitionRoot>
+                                                                        </div>
                                                                 </td>
                                                         </tr>
                                                 
@@ -123,9 +266,9 @@
                </div>
 
                <div class="space-y-5">
-                      <div class="grid grid-cols-2 gap-10">
+                      <div class="grid grid-cols-2">
                                 <div></div>
-                                <Button variant="secondary" size="sm" class="rounded-md flex items-center justify-center space-x-2 ">
+                                <Button @click="isOpenAddPackageModal = true"  variant="secondary" size="sm" class="rounded-md flex items-center justify-center space-x-2 ">
                                         <span>
                                                 <Icon name="Package" size="18" stroke-width="1" />
                                         </span>
@@ -133,27 +276,25 @@
                                 </Button>
                       </div>
                       <div class="grid grid-cols-3 gap-5">
-                                <Button variant="primary" size="sm" class="rounded-md flex items-center justify-center space-x-2">
+                                <Button variant="primary" size="sm" class="text-sm rounded-md flex items-center justify-center space-x-1">
                                         <span>
                                                 <Icon name="ArrowLeft" size="18" stroke-width="1" />
                                         </span>
                                         <span>ចូលឃ្លាំង</span>
                                         
                                 </Button>
-                                <Button variant="warning" size="sm" class="rounded-md flex items-center justify-center space-x-2">
+                                <Button variant="warning" size="sm" class="text-sm rounded-md flex items-center justify-center space-x-1">
                                         <span>
                                                 <Icon name="ArrowRight" size="18" stroke-width="1" />
                                         </span>
                                         <span>ចេញឃ្លាំង</span>
                                         
                                 </Button>
-                                <Button variant="black" size="sm" class="rounded-md flex items-center justify-center space-x-2">
+                                <Button variant="black" size="sm" class="text-sm rounded-md flex items-center justify-center space-x-1">
                                         <span>
                                                 <Icon name="Check" size="18" stroke-width="1" color="white" />
                                         </span>
                                         <span>ត្រួតពិនិត្យ</span>
-
-                                        
                                 </Button>
                       </div>
 
@@ -277,5 +418,13 @@
 
         </div>
 
+
+
+
+
+
+        <!--  =============== Modal =============================== -->
+
+        <AddPackageModal :openModal="isOpenAddPackageModal" @closeAddPackageModal="isOpenAddPackageModal = false" />
 
 </template>
